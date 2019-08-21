@@ -13,6 +13,7 @@
 		449DDA4E230D8A5900CEADDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 449DDA4D230D8A5900CEADDC /* Assets.xcassets */; };
 		449DDA51230D8A5900CEADDC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 449DDA4F230D8A5900CEADDC /* LaunchScreen.storyboard */; };
 		449DDA54230D8A5900CEADDC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 449DDA53230D8A5900CEADDC /* main.m */; };
+		449DDA5C230D8A6D00CEADDC /* JB.m in Sources */ = {isa = PBXBuildFile; fileRef = 449DDA5B230D8A6D00CEADDC /* JB.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		449DDA50230D8A5900CEADDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		449DDA52230D8A5900CEADDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		449DDA53230D8A5900CEADDC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		449DDA5A230D8A6D00CEADDC /* JB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JB.h; sourceTree = "<group>"; };
+		449DDA5B230D8A6D00CEADDC /* JB.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JB.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +70,8 @@
 				449DDA4F230D8A5900CEADDC /* LaunchScreen.storyboard */,
 				449DDA52230D8A5900CEADDC /* Info.plist */,
 				449DDA53230D8A5900CEADDC /* main.m */,
+				449DDA5A230D8A6D00CEADDC /* JB.h */,
+				449DDA5B230D8A6D00CEADDC /* JB.m */,
 			);
 			path = isJailbroken;
 			sourceTree = "<group>";
@@ -144,6 +149,7 @@
 				449DDA49230D8A5700CEADDC /* ViewController.m in Sources */,
 				449DDA54230D8A5900CEADDC /* main.m in Sources */,
 				449DDA46230D8A5700CEADDC /* AppDelegate.m in Sources */,
+				449DDA5C230D8A6D00CEADDC /* JB.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,6 +292,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = W6RB25ZNB7;
 				INFOPLIST_FILE = isJailbroken/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -302,6 +309,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = W6RB25ZNB7;
 				INFOPLIST_FILE = isJailbroken/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
