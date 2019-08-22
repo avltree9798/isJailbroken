@@ -16,7 +16,8 @@ BOOL canOpen(NSString * path)
     FILE *file = fopen([path UTF8String], "r");
     if(file==nil){
         NSFileManager *fileManager = [NSFileManager defaultManager];
-        if([fileManager fileExistsAtPath:path isDirectory:YES]){
+        BOOL isDirectory = YES;
+        if([fileManager fileExistsAtPath:path isDirectory:&isDirectory]){
             return YES;
         }
         return NO;
@@ -42,6 +43,31 @@ BOOL isJb()
         return YES;
     }
     
+    //symlink verification
+    struct stat sym;
+    if(lstat("/Applications", &sym) || lstat("/var/stash/Library/Ringtones", &sym) ||
+       lstat("/var/stash/Library/Wallpaper", &sym) ||
+       lstat("/var/stash/usr/include", &sym) ||
+       lstat("/var/stash/usr/libexec", &sym)  ||
+       lstat("/var/stash/usr/share", &sym) ||
+       lstat("/var/stash/usr/arm-apple-darwin9", &sym))
+    {
+        if(sym.st_mode & S_IFLNK){
+            return YES;
+        }
+    }
+    
+    //Check process forking
+    int pid = fork();
+    if(!pid)
+    {
+        exit(1);
+    }
+    if(pid >= 0)
+    {
+        return YES;
+    }
+    
     //Check permission to write to /private
     NSMutableString *path = [[NSMutableString alloc] initWithString:@"/private/"];
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -55,16 +81,7 @@ BOOL isJb()
         return NO;
     }
     
-    //Check process forking
-    int pid = fork();
-    if(!pid)
-    {
-        exit(1);
-    }
-    if(pid >= 0)
-    {
-        return YES;
-    }
+    
 }
 
 @end
