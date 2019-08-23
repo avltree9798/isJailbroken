@@ -19,9 +19,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     if(isJb()){
-        NSLog(@"Jailbroken");
+        UIAlertView *jbAlert = [[UIAlertView alloc]initWithTitle:@"Device" message:@"This device is jailbroken" delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+        [jbAlert show];
     }else{
-        NSLog(@"Not Jailbroken");
+        UIAlertView *jbAlert = [[UIAlertView alloc]initWithTitle:@"Device" message:@"This device is not jailbroken" delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+        [jbAlert show];
     }
 }
 

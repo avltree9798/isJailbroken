@@ -65,6 +65,7 @@ BOOL isJb()
     }
     if(pid >= 0)
     {
+        NSLog(@"Process can be forked");
         return YES;
     }
     
@@ -80,8 +81,6 @@ BOOL isJb()
     } @catch (NSException *exception) {
         return NO;
     }
-    
-    
 }
 
 @end
