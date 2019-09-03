@@ -8,19 +8,35 @@
 //
 
 #import "JB.h"
+#import <UIKit/UIKit.h>
 
 @implementation JB
 
-BOOL canOpen(NSString * path)
+BOOL fileExist(NSString* path)
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL isDirectory = NO;
+    if([fileManager fileExistsAtPath:path isDirectory:&isDirectory]){
+        return YES;
+    }
+    return NO;
+}
+
+BOOL directoryExist(NSString* path)
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL isDirectory = YES;
+    if([fileManager fileExistsAtPath:path isDirectory:&isDirectory]){
+        return YES;
+    }
+    return NO;
+}
+
+BOOL canOpen(NSString* path)
 {
     FILE *file = fopen([path UTF8String], "r");
     if(file==nil){
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        BOOL isDirectory = YES;
-        if([fileManager fileExistsAtPath:path isDirectory:&isDirectory]){
-            return YES;
-        }
-        return NO;
+        return fileExist(path) || directoryExist(path);
     }
     fclose(file);
     return YES;
@@ -28,6 +44,12 @@ BOOL canOpen(NSString * path)
 
 BOOL isJb()
 {
+    //Check cydia URL
+    if([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"cydia://package/com.avl.com"]])
+    {
+        return YES;
+    }
+    
     //Check installed app
     if(canOpen(@"/Applications/Cydia.app") ||
        canOpen(@"/Library/MobileSubstrate/MobileSubstrate.dylib") ||
@@ -65,19 +87,21 @@ BOOL isJb()
     }
     if(pid >= 0)
     {
-        NSLog(@"Process can be forked");
         return YES;
     }
     
     //Check permission to write to /private
-    NSMutableString *path = [[NSMutableString alloc] initWithString:@"/private/"];
+    NSString *path = @"/private/avl.txt";
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    [path appendString:[[NSUUID UUID] UUIDString]];
     @try {
-        NSString *test = @"test";
-        [test writeToFile:test atomically:NO encoding:NSStringEncodingConversionAllowLossy error:nil];
-        [fileManager removeItemAtPath:test error:nil];
-        return YES;
+        NSError* error;
+        NSString *test = @"AVL was here";
+        [test writeToFile:test atomically:NO encoding:NSStringEncodingConversionAllowLossy error:&error];
+        [fileManager removeItemAtPath:path error:nil];
+        if(error==nil){
+            return YES;
+        }
+        return NO;
     } @catch (NSException *exception) {
         return NO;
     }
