@@ -115,6 +115,12 @@ BOOL isJb()
         return YES;
     }
     
+    //Check syscall
+    if(system(nil))
+    {
+        return YES;
+    }
+    
     //Check permission to write to /private
     NSString *path = @"/private/avl.txt";
     NSFileManager *fileManager = [NSFileManager defaultManager];

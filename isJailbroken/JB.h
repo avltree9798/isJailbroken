@@ -14,6 +14,7 @@
 #include <stdbool.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <stdlib.h>
 #include <sys/sysctl.h>
 
 NS_ASSUME_NONNULL_BEGIN
