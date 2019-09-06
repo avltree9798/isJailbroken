@@ -86,7 +86,8 @@ BOOL isJb()
     //Check installed app
     for(NSString* check in checks)
     {
-        if(canOpen(check)){
+        if(canOpen(check))
+        {
             return YES;
         }
     }
@@ -99,7 +100,8 @@ BOOL isJb()
        lstat("/var/stash/usr/share", &sym) ||
        lstat("/var/stash/usr/arm-apple-darwin9", &sym))
     {
-        if(sym.st_mode & S_IFLNK){
+        if(sym.st_mode & S_IFLNK)
+        {
             return YES;
         }
     }
@@ -116,10 +118,10 @@ BOOL isJb()
     }
     
     //Check syscall
-    if(system(nil))
-    {
-        return YES;
-    }
+//    if(system(nil))
+//    {
+//        return YES;
+//    }
     
     //Check permission to write to /private
     NSString *path = @"/private/avl.txt";
@@ -129,7 +131,8 @@ BOOL isJb()
         NSString *test = @"AVL was here";
         [test writeToFile:test atomically:NO encoding:NSStringEncodingConversionAllowLossy error:&error];
         [fileManager removeItemAtPath:path error:nil];
-        if(error==nil){
+        if(error==nil)
+        {
             return YES;
         }
         return NO;
