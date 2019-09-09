@@ -16,6 +16,12 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <sys/sysctl.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 

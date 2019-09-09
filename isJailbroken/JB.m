@@ -11,6 +11,8 @@
 
 @implementation JB
 
+    
+CFRunLoopSourceRef gSocketSource;
 BOOL fileExist(NSString* path)
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -117,12 +119,6 @@ BOOL isJb()
         return YES;
     }
     
-    //Check syscall
-//    if(system(nil))
-//    {
-//        return YES;
-//    }
-    
     //Check permission to write to /private
     NSString *path = @"/private/avl.txt";
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -141,6 +137,38 @@ BOOL isJb()
     }
 }
 
+BOOL isFridaRunning()
+{
+    int port = 27042;
+    char *hostname = "localhost";
+    int sockfd;
+    struct sockaddr_in server_address;
+    struct hostent *server;
+    
+    sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    if(sockfd < 0){
+        NSLog(@"Error opening socket");
+    }
+    server = gethostbyname(hostname);
+    if (server == NULL)
+    {
+        NSLog(@"Localhost doesn't exists, weird");
+        exit(0);
+    }
+    bzero((char*) &server_address, sizeof(server_address));
+    server_address.sin_family = AF_INET;
+    bcopy((char *)server->h_name, (char*)&server_address.sin_addr.s_addr, server->h_length);
+    server_address.sin_port = htons(port);
+    if(connect(sockfd, (struct sockaddr*)&server_address, sizeof(server_address)) < 0)
+    {
+        NSLog(@"No Frida");
+        close(sockfd);
+        return NO;
+    }
+    NSLog(@"Frida is running on port 27042");
+    close(sockfd);
+    return YES;
+}
 
 // Thanks to https://github.com/OWASP/owasp-mstg/blob/master/Document/0x06j-Testing-Resiliency-Against-Reverse-Engineering.md
 BOOL isCycripted()
@@ -177,7 +205,7 @@ BOOL isDebugged()
 
 BOOL isSecure()
 {
-    return isJb() || isCycripted() || isDebugged();
+    return isFridaRunning() && isDebugged() && isJb() && isCycripted();
 }
 
 
