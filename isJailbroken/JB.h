@@ -21,13 +21,15 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
+#include <dlfcn.h>
+#include "TargetConditionals.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JB : NSObject
 BOOL isJb();
-BOOL isCycripted();
+BOOL isInjectedWithDynamicLibrary();
 BOOL isSecure();
 BOOL isDebugged();
 @end
