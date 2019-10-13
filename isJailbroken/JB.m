@@ -49,7 +49,7 @@ BOOL canOpen(NSString* path)
     return YES;
 }
 
-// Preventing libobjc hooked
+// Preventing libobjc hooked, strstr implementation
 const char* tuyul(const char* X, const char* Y)
 {
     if (*Y == '\0')
@@ -204,15 +204,19 @@ BOOL isInjectedWithDynamicLibrary()
                 A('t'),
                 0
             };
+            
             char libfridaHide[] = {
-                A('l'),
-                A('i'),
-                A('b'),
-                A('f'),
+                A('F'),
                 A('r'),
                 A('i'),
                 A('d'),
                 A('a'),
+                A('G'),
+                A('a'),
+                A('d'),
+                A('g'),
+                A('e'),
+                A('t'),
                 0
             };
             char zzzzLibertyDylibHide[] = {
