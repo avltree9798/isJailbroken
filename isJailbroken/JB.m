@@ -74,43 +74,41 @@ BOOL isJb()
     {
         return YES;
     }
-    NSArray* checks = [[NSArray alloc]initWithObjects:[NSString  stringWithFormat:@"/%@%@%@%@%@%@/%@%@%@%@%@",@"A",@"pp",@"li",@"ca",@"ti",@"on",@"Cy",@"di",@"a.",@"ap",@"p"],
-                       [NSString stringWithFormat:@"/%@%@%@%@%@", @"Libr",@"ary/Mo",@"bileSubstra",@"te/MobileSubs",@"trate.dylib"],
-                       [NSString stringWithFormat:@"/%@%@%@", @"bi",@"n/b",@"ash"],
-                       [NSString stringWithFormat:@"/%@%@%@%@%@", @"us", @"r/sb",@"in", @"s", @"shd"],
-                       [NSString stringWithFormat:@"/%@%@%@", @"et",@"c/a",@"pt/"],
-                       [NSString stringWithFormat:@"/%@%@%@%@%@", @"us", @"r/b",@"in", @"s", @"sh"],
-                       [NSString stringWithFormat:@"/%@%@%@%@", @"private/va",@"r/l",@"ib",@"/apt/"],
-                       [NSString stringWithFormat:@"/%@%@%@%@", @"private/va",@"r/l",@"ib/c",@"ydia/"],
-                       [NSString stringWithFormat:@"/%@%@%@%@%@", @"private/va",@"r/t",@"mp/c",@"ydia.",@"log"],
-                       [NSString stringWithFormat:@"/%@%@%@%@", @"va",@"r/l",@"ib/c",@"ydia/"],
-                       [NSString stringWithFormat:@"/%@%@%@", @"priv",@"ate/etc/dpkg/",@"origins/debian"],
-                       [NSString stringWithFormat:@"/%@%@%@", @"b",@"in/",@"sh"],
-                       [NSString stringWithFormat:@"/%@%@", @"private/etc/a",@"pt"],
-                       [NSString stringWithFormat:@"/%@%@%@", @"etc/s",@"sh/s",@"shd_config"],
-                       [NSString stringWithFormat:@"/%@%@%@%@%@", @"priva",@"te/et",@"c/s",@"sh/s",@"shd_config"],
-                       [NSString stringWithFormat:@"/%@%@%@%@%@%@%@%@",@"pri",@"vatr/va",@"r/mobil",@"eLibrar",@"y/SBSe",@"tt",@"ings",@"Themes/"],
-                       [NSString stringWithFormat:@"/%@%@%@%@", @"pri",@"vate/va",@"r/s",@"tash"],
-                       [NSString stringWithFormat:@"/%@%@%@%@%@%@%@", @"us", @"r/l",@"ibe", @"xe", @"c/sft", @"p-ser",@"ver"],
-                       [NSString stringWithFormat:@"/%@%@%@%@%@%@", @"us", @"r/l",@"ibe", @"xe", @"c/cy", @"dia/"],
-                       [NSString stringWithFormat:@"/%@%@%@%@%@%@%@", @"us", @"r/sb",@"in/", @"fri", @"da-", @"se",@"rver"],
-                       [NSString stringWithFormat:@"/%@%@%@%@%@%@%@", @"us", @"r/b",@"in/", @"c", @"ycr", @"i",@"pt"],
-                       [NSString stringWithFormat:@"/%@%@%@%@%@%@%@", @"us", @"r/loc",@"al/bin/", @"c", @"ycr", @"i",@"pt"],
-                       [NSString stringWithFormat:@"/%@%@%@%@%@%@%@", @"us", @"r/lib",@"/lib", @"cy", @"cr", @"i",@"pt.dylib"],
-                       [NSString stringWithFormat:@"/%@%@%@%@%@%@%@%@",@"Sy",@"stem/Lib",@"rary/Laun",@"chDae",@"mons/com.saur",@"ik.Cy",@"@dia.Star",@"tup.plist"],
-                       [NSString stringWithFormat:@"/%@%@%@%@%@%@%@%@",@"Sy",@"stem/Lib",@"rary/Laun",@"chDae",@"mons/com.ik",@"ey.bbo",@"@t.",@"plist"],
-                       [NSString stringWithFormat:@"/%@%@%@%@%@%@%@%@",@"Libr",@"ary/Mobil",@"eSubstrate/Dy",@"namic",@"Libraries/",@"Veen",@"cy.",@"plist"],
-                       [NSString stringWithFormat:@"/%@%@%@%@%@%@%@%@",@"Libr",@"ary/Mobil",@"eSubstrate/Dy",@"namic",@"Libraries/",@"Live",@"Clock.",@"plist"],
-                       [NSString stringWithFormat:@"/%@%@%@%@%@", @"us",@"r/li",@"bexe",@"c/ssh-k",@"eysign"],
-                       [NSString stringWithFormat:@"/%@%@%@%@%@%@", @"us", @"r/l",@"ibe", @"xe", @"c/sftp-", @"server"],
-                       [NSString stringWithFormat:@"/%@%@%@%@%@%@%@", @"App", @"lic",@"ati", @"ons/", @"bla", @"ckra1n.a", @"pp"],
-                       [NSString stringWithFormat:@"/%@%@%@%@%@%@%@%@", @"App", @"lic",@"ati", @"ons/", @"Fake", @"Car",@"rier.a", @"pp"],
-                       [NSString stringWithFormat:@"/%@%@%@%@%@%@%@", @"App", @"lic",@"ati", @"ons/", @"Int", @"elliScre", @"en.app"],
-                       [NSString stringWithFormat:@"/%@%@%@%@%@%@%@", @"App", @"lic",@"ati", @"ons/", @"Win", @"terBo", @"ard.app"],
-                       [NSString stringWithFormat:@"/%@%@%@%@%@%@%@", @"App", @"lic",@"ati", @"ons/", @"SB", @"Set", @"tings.app"],
-                       [NSString stringWithFormat:@"/%@%@%@%@%@%@%@", @"App", @"lic",@"ati", @"ons/", @"Snoop-it", @" Config.a", @"pp"],
-                       [NSString stringWithFormat:@"/%@%@%@", @"priv",@"ate/etc/dpkg/",@"origins/debian"],
-                       nil];
+    NSArray* checks = [[NSArray alloc]initWithObjects:@"/Application/Cydia.app",
+                       @"/Library/MobileSubstrate/MobileSubstrate.dylib",
+                       @"/bin/bash",
+                       @"/usr/sbin/sshd",
+                       @"/etc/apt",
+                       @"/usr/bin/ssh",
+                       @"/private/var/lib/apt",
+                       @"/private/var/lib/cydia",
+                       @"/private/var/tmp/cydia.log",
+                       @"/Applications/WinterBoard.app",
+                       @"/var/lib/cydia",
+                       @"/private/etc/dpkg/origins/debian",
+                       @"/bin.sh",
+                       @"/private/etc/apt",
+                       @"/etc/ssh/sshd_config",
+                       @"/private/etc/ssh/sshd_config",
+                       @"/Applications/SBSetttings.app",
+                       @"/private/var/mobileLibrary/SBSettingsThemes/",
+                       @"/private/var/stash",
+                       @"/usr/libexec/sftp-server",
+                       @"/usr/libexec/cydia/",
+                       @"/usr/sbin/frida-server",
+                       @"/usr/bin/cycript",
+                       @"/usr/local/bin/cycript",
+                       @"/usr/lib/libcycript.dylib",
+                       @"/System/Library/LaunchDaemons/com.saurik.Cydia.Startup.plist",
+                       @"/System/Library/LaunchDaemons/com.ikey.bbot.plist",
+                       @"/Applications/FakeCarrier.app",
+                       @"/Library/MobileSubstrate/DynamicLibraries/Veency.plist",
+                       @"/Library/MobileSubstrate/DynamicLibraries/LiveClock.plist",
+                       @"/usr/libexec/ssh-keysign",
+                       @"/usr/libexec/sftp-server",
+                       @"/Applications/blackra1n.app",
+                       @"/Applications/IntelliScreen.app",
+                       @"/Applications/Snoop-itConfig.app", nil];
     //Check installed app
     for(NSString* check in checks)
     {
@@ -306,16 +304,6 @@ BOOL isInjectedWithDynamicLibrary()
                 A('b'),
                 0
             };
-
-            //For frida-*
-            char fridadylib[] = {
-                A('f'),
-                A('r'),
-                A('i'),
-                A('d'),
-                A('a'),
-                0
-            };
             
             char libsparkapplistdylib[] = {
                 A('l'),
@@ -343,9 +331,6 @@ BOOL isInjectedWithDynamicLibrary()
             };
             
             if (tuyul(name, decryptString(mobilesubstratedylib)) != NULL){
-                return YES;
-            }
-            if (tuyul(name, decryptString(fridadylib)) != NULL){
                 return YES;
             }
             if(tuyul(name, decryptString(libsparkapplistdylib)) != NULL){
