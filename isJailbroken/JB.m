@@ -42,7 +42,6 @@ BOOL directoryExist(NSString* path)
 BOOL canOpen(NSString* path)
 {
     FILE *file = fopen([path UTF8String], "r");
-    NSLog(path);
     if(file==nil){
         return fileExist(path) || directoryExist(path);
     }
