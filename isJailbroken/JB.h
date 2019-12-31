@@ -30,8 +30,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface JB : NSObject
 BOOL isJb();
 BOOL isInjectedWithDynamicLibrary();
-BOOL isSecure();
+BOOL isSecurityCheckNotPassed();
 BOOL isDebugged();
+BOOL isFromAppStore();
 @end
 
 NS_ASSUME_NONNULL_END

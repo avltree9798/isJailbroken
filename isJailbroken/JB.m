@@ -8,6 +8,9 @@
 //
 
 #import "JB.h"
+#import <dlfcn.h>
+#import <mach-o/dyld.h>
+#import <TargetConditionals.h>
 
 @implementation JB
 
@@ -16,6 +19,17 @@
 typedef int (*ptrace_ptr_t)(int _request, pid_t _pid, caddr_t _addr, int _data);
 #if !defined(PT_DENY_ATTACH)
 #define PT_DENY_ATTACH 31
+#endif
+
+#if TARGET_IPHONE_SIMULATOR && !defined(LC_ENCRYPTION_INFO)
+#define LC_ENCRYPTION_INFO 0x21
+struct encryption_info_command {
+    uint32_t cmd;
+    uint32_t cmdsize;
+    uint32_t cryptoff;
+    uint32_t cryptsize;
+    uint32_t cryptid;
+};
 #endif
 
 CFRunLoopSourceRef gSocketSource;
@@ -330,6 +344,55 @@ BOOL isInjectedWithDynamicLibrary()
                 0
             };
             
+            char SubstrateInserterdylib[] = {
+                A('S'),
+                A('u'),
+                A('b'),
+                A('s'),
+                A('t'),
+                A('r'),
+                A('a'),
+                A('t'),
+                A('e'),
+                A('I'),
+                A('n'),
+                A('s'),
+                A('e'),
+                A('r'),
+                A('t'),
+                A('e'),
+                A('d'),
+                A('.'),
+                A('d'),
+                A('y'),
+                A('l'),
+                A('i'),
+                A('b'),
+                0
+            };
+            
+            char zzzzzzUnSubdylib[] = {
+                A('z'),
+                A('z'),
+                A('z'),
+                A('z'),
+                A('z'),
+                A('z'),
+                A('U'),
+                A('n'),
+                A('S'),
+                A('u'),
+                A('b'),
+                A('.'),
+                A('d'),
+                A('y'),
+                A('l'),
+                A('i'),
+                A('b'),
+                0
+                
+            };
+            
             if (tuyul(name, decryptString(mobilesubstratedylib)) != NULL){
                 return YES;
             }
@@ -352,6 +415,12 @@ BOOL isInjectedWithDynamicLibrary()
                 return YES;
             }
             if (tuyul(name, decryptString(zeroshadowdylib)) != NULL){
+                return YES;
+            }
+            if (tuyul(name, decryptString(SubstrateInserterdylib)) != NULL){
+                return YES;
+            }
+            if (tuyul(name, decryptString(zzzzzzUnSubdylib)) != NULL){
                 return YES;
             }
         }
@@ -379,13 +448,24 @@ BOOL isDebugged()
     return ( (info.kp_proc.p_flag & P_TRACED) != 0 );
 }
 
-BOOL isSecure()
+BOOL isFromAppStore()
 {
-    return
-            isJb() &&
-            isInjectedWithDynamicLibrary();
-    
+    #if TARGET_IPHONE_SIMULATOR
+        return NO;
+    #else
+        NSString *provisionPath = [[NSBundle mainBundle] pathForResource:@"embedded" ofType:@"mobileprovision"];
+        if (nil == provisionPath || 0 == provisionPath.length) {
+            return YES;
+        }
+        return NO;
+    #endif
 }
 
+BOOL isSecurityCheckNotPassed()
+{
+    if(TARGET_IPHONE_SIMULATOR)return NO;
+    return !isJb() && !isInjectedWithDynamicLibrary() && !isDebugged();
+    
+}
 
 @end

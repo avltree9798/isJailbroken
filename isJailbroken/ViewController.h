@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "JB.h"
+#import <sys/utsname.h>
 
 @interface ViewController : UIViewController
 
