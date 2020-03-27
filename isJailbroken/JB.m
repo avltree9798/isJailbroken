@@ -195,6 +195,7 @@ BOOL isInjectedWithDynamicLibrary()
             break;
         }
         if (name != NULL) {
+            NSLog(@"%s\n",name);
             char cyinjectHide[] = {
                 A('c'),
                 A('y'),
@@ -361,7 +362,7 @@ BOOL isInjectedWithDynamicLibrary()
                 A('r'),
                 A('t'),
                 A('e'),
-                A('d'),
+                A('r'),
                 A('.'),
                 A('d'),
                 A('y'),
@@ -394,33 +395,43 @@ BOOL isInjectedWithDynamicLibrary()
             };
             
             if (tuyul(name, decryptString(mobilesubstratedylib)) != NULL){
+                printf("Detected : %s\n", name);
                 return YES;
             }
             if(tuyul(name, decryptString(libsparkapplistdylib)) != NULL){
+                printf("Detected : %s\n", name);
                 return YES;
             }
             if (tuyul(name, decryptString(cyinjectHide)) != NULL){
+                printf("Detected : %s\n", name);
                 return YES;
             }
             if (tuyul(name, decryptString(libcycriptHide)) != NULL){
+                printf("Detected : %s\n", name);
                 return YES;
             }
             if (tuyul(name, decryptString(libfridaHide)) != NULL){
+                printf("Detected : %s\n", name);
                 return YES;
             }
             if (tuyul(name, decryptString(zzzzLibertyDylibHide)) != NULL){
+                printf("Detected : %s\n", name);
                 return YES;
             }
             if (tuyul(name, decryptString(sslkillswitch2dylib)) != NULL){
+                printf("Detected : %s\n", name);
                 return YES;
             }
             if (tuyul(name, decryptString(zeroshadowdylib)) != NULL){
+                printf("Detected : %s\n", name);
                 return YES;
             }
             if (tuyul(name, decryptString(SubstrateInserterdylib)) != NULL){
+                printf("Detected : %s\n", name);
                 return YES;
             }
             if (tuyul(name, decryptString(zzzzzzUnSubdylib)) != NULL){
+                printf("Detected : %s\n", name);
                 return YES;
             }
         }
