@@ -21,6 +21,8 @@ typedef int (*ptrace_ptr_t)(int _request, pid_t _pid, caddr_t _addr, int _data);
 #define PT_DENY_ATTACH 31
 #endif
 
+BOOL DEBUGGING = YES;
+
 #if TARGET_IPHONE_SIMULATOR && !defined(LC_ENCRYPTION_INFO)
 #define LC_ENCRYPTION_INFO 0x21
 struct encryption_info_command {
@@ -31,6 +33,11 @@ struct encryption_info_command {
     uint32_t cryptid;
 };
 #endif
+
+void LOG(NSString* loc)
+{
+    NSLog(@"Found: %@", loc);
+}
 
 CFRunLoopSourceRef gSocketSource;
 BOOL fileExist(NSString* path)
@@ -83,7 +90,7 @@ const char* tuyul(const char* X, const char* Y)
 
 BOOL isJb()
 {
-    //Check cydia URL
+//    Check cydia URL
     if([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"cydia://package/com.avl.com"]])
     {
         return YES;
@@ -128,6 +135,7 @@ BOOL isJb()
     {
         if(canOpen(check))
         {
+            if(DEBUGGING){LOG(check);}
             return YES;
         }
     }
@@ -142,6 +150,7 @@ BOOL isJb()
     {
         if(sym.st_mode & S_IFLNK)
         {
+            if(DEBUGGING){LOG(@"Symlink");}
             return YES;
         }
     }
@@ -154,6 +163,7 @@ BOOL isJb()
     }
     if(pid >= 0)
     {
+        if(DEBUGGING){LOG(@"Fork");}
         return YES;
     }
     
@@ -167,6 +177,7 @@ BOOL isJb()
         [fileManager removeItemAtPath:path error:nil];
         if(error==nil)
         {
+            if(DEBUGGING){LOG(@"File creation");}
             return YES;
         }
         return NO;
@@ -195,10 +206,10 @@ BOOL isInjectedWithDynamicLibrary()
             break;
         }
         if (name != NULL) {
-            NSLog(@"%s\n",name);
             char cyinjectHide[] = {
                 A('c'),
                 A('y'),
+                A('i'),
                 A('n'),
                 A('j'),
                 A('e'),
@@ -394,44 +405,65 @@ BOOL isInjectedWithDynamicLibrary()
                 
             };
             
+            char kor[] = {
+                A('.'),
+                A('.'),
+                A('.'),
+                A('!'),
+                A('@'),
+                A('#'),
+                0
+            };
+            char cephei[] = {
+                A('/'),A('u'),A('s'),A('r'),A('/'),A('l'),A('i'),A('b'),A('/'),A('C'),A('e'),A('p'),A('h'),A('e'),A('i'),A('.'),A('f'),A('r'),A('a'),A('m'),A('e'),A('w'),A('o'),A('r'),A('k'),A('/'),A('C'),A('e'),A('p'),A('h'),A('e'),A('i'),
+                0
+            };
+            if (tuyul(name, decryptString(cephei)) != NULL){
+                if(DEBUGGING){LOG([[NSString alloc] initWithFormat:@"%s", name]);}
+                return YES;
+            }
+            if (tuyul(name, decryptString(kor)) != NULL){
+                if(DEBUGGING){LOG([[NSString alloc] initWithFormat:@"%s", name]);}
+                return YES;
+            }
             if (tuyul(name, decryptString(mobilesubstratedylib)) != NULL){
-                printf("Detected : %s\n", name);
+                if(DEBUGGING){LOG([[NSString alloc] initWithFormat:@"%s", name]);}
                 return YES;
             }
             if(tuyul(name, decryptString(libsparkapplistdylib)) != NULL){
-                printf("Detected : %s\n", name);
+                if(DEBUGGING){LOG([[NSString alloc] initWithFormat:@"%s", name]);}
                 return YES;
             }
             if (tuyul(name, decryptString(cyinjectHide)) != NULL){
-                printf("Detected : %s\n", name);
+                if(DEBUGGING){LOG([[NSString alloc] initWithFormat:@"%s", name]);}
                 return YES;
             }
             if (tuyul(name, decryptString(libcycriptHide)) != NULL){
-                printf("Detected : %s\n", name);
+                if(DEBUGGING){LOG([[NSString alloc] initWithFormat:@"%s", name]);}
                 return YES;
             }
             if (tuyul(name, decryptString(libfridaHide)) != NULL){
-                printf("Detected : %s\n", name);
+                if(DEBUGGING){LOG([[NSString alloc] initWithFormat:@"%s", name]);}
                 return YES;
             }
             if (tuyul(name, decryptString(zzzzLibertyDylibHide)) != NULL){
-                printf("Detected : %s\n", name);
+                if(DEBUGGING){LOG([[NSString alloc] initWithFormat:@"%s", name]);}
                 return YES;
             }
             if (tuyul(name, decryptString(sslkillswitch2dylib)) != NULL){
-                printf("Detected : %s\n", name);
+                if(DEBUGGING){LOG([[NSString alloc] initWithFormat:@"%s", name]);}
                 return YES;
             }
             if (tuyul(name, decryptString(zeroshadowdylib)) != NULL){
-                printf("Detected : %s\n", name);
+                if(DEBUGGING){LOG([[NSString alloc] initWithFormat:@"%s", name]);}
                 return YES;
             }
             if (tuyul(name, decryptString(SubstrateInserterdylib)) != NULL){
-                printf("Detected : %s\n", name);
+                if(DEBUGGING){LOG([[NSString alloc] initWithFormat:@"%s", name]);}
                 return YES;
             }
             if (tuyul(name, decryptString(zzzzzzUnSubdylib)) != NULL){
-                printf("Detected : %s\n", name);
+                if(DEBUGGING){LOG([[NSString alloc] initWithFormat:@"%s", name]);}
                 return YES;
             }
         }
