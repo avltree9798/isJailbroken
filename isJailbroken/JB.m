@@ -129,7 +129,10 @@ BOOL isJb()
                        @"/usr/libexec/sftp-server",
                        @"/Applications/blackra1n.app",
                        @"/Applications/IntelliScreen.app",
-                       @"/Applications/Snoop-itConfig.app", nil];
+                       @"/Applications/Snoop-itConfig.app",
+                       @"/var/checkra1n.dmg",
+                       @"/var/binpack",
+                       nil];
     //Check installed app
     for(NSString* check in checks)
     {
@@ -504,7 +507,7 @@ BOOL isFromAppStore()
     #endif
 }
 
-BOOL isSecurityCheckNotPassed()
+BOOL isSecurityCheckPassed()
 {
     if(TARGET_IPHONE_SIMULATOR)return NO;
     return !isJb() && !isInjectedWithDynamicLibrary() && !isDebugged();
