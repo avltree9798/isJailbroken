@@ -22,7 +22,7 @@
 @implementation ViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
-    BOOL securityCheckResult = isSecurityCheckNotPassed();
+    BOOL securityCheckResult = isSecurityCheckPassed();
     BOOL appStoreResult = isFromAppStore();
     BOOL debugResult = isDebugged();
     BOOL dylibResult = isInjectedWithDynamicLibrary();
