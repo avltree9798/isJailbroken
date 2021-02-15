@@ -88,6 +88,15 @@ const char* tuyul(const char* X, const char* Y)
     return NULL;
 }
 
+BOOL isRunningOnMac()
+{
+    BOOL isiOSAppOnMac = NO;
+    if (@available(iOS 14.0, *)) {
+        isiOSAppOnMac = [NSProcessInfo processInfo].isiOSAppOnMac;
+    }
+    return isiOSAppOnMac;
+}
+
 BOOL isJb()
 {
 //    Check cydia URL
@@ -510,6 +519,7 @@ BOOL isFromAppStore()
 BOOL isSecurityCheckPassed()
 {
     if(TARGET_IPHONE_SIMULATOR)return NO;
+    if(TARGET_OS_OSX)return NO;
     return !isJb() && !isInjectedWithDynamicLibrary() && !isDebugged();
     
 }
